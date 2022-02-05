@@ -52,19 +52,19 @@ class MainActivity : AppCompatActivity() {
         val xAxis = chart.xAxis
         xAxis.position = XAxisPosition.BOTTOM
         xAxis.setDrawGridLines(false)
+        xAxis.setDrawAxisLine(false)
 
         val l = chart.legend
         l.isEnabled = false
         val leftAxis = chart.axisLeft
-//        leftAxis.setEnabled(false);
-        //        leftAxis.setEnabled(false);
-        leftAxis.setLabelCount(7, false)
-        leftAxis.setDrawGridLines(false)
-        leftAxis.setDrawAxisLine(false)
+        leftAxis.isEnabled = false
 
         val rightAxis = chart.axisRight
-        rightAxis.isEnabled = false
-
+        rightAxis.apply {
+            setLabelCount(7, false)
+            setDrawGridLines(true)
+            setDrawAxisLine(false)
+        }
         chart.setViewPortOffsets(100f, 100f, 100f, 100f)
         // animate calls invalidate()...
         chart.data = data
@@ -99,6 +99,7 @@ class MainActivity : AppCompatActivity() {
             isEnabled = false
             spaceTop = 40f
             spaceBottom = 40f
+            setDrawAxisLine(false)
         }
 
         val axisRight = chart.axisRight
@@ -110,6 +111,7 @@ class MainActivity : AppCompatActivity() {
             setCenterAxisLabels(true)
             axisMaximum = 1800f
             axisMinimum = 1300f
+            setDrawAxisLine(false)
             setLabelCount(6, true)
             yOffset = -9f
             valueFormatter = object : IndexAxisValueFormatter() {
@@ -127,7 +129,7 @@ class MainActivity : AppCompatActivity() {
             textColor = Color.rgb(255, 192, 56)
             setDrawGridLines(false)
             setCenterAxisLabels(true)
-            position = XAxis.XAxisPosition.BOTTOM
+            position = XAxisPosition.BOTTOM
             valueFormatter = object : IndexAxisValueFormatter() {
                 override fun getFormattedValue(value: Float, axis: AxisBase): String {
                     val s = when (value) {
