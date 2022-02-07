@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_500">#4941F2</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="onPri">#1c1c1c</color>
+    <color name="onPri">@color/white</color>
     <color name="royal_blue">#514af7</color>
     <color name="subtitle_color">#4D000000</color>
     <color name="profit_percentage_color">#80292D32</color>
@@ -16,12 +15,19 @@
     <color name="subtitle_text_color">#99000000</color>
     <color name="dark_grey">#292929</color>
     <color name="white_10">#1AFFFFFF</color>
+    <color name="white_40">#66FFFFFF</color>
     <color name="text_black">#292D32</color>
     <color name="iconTint">@color/text_black</color>
     <color name="imageStrokeBg">#1A000000</color>
     <color name="headerTextColor">@color/text_black</color>
-    <color name="coin_bg1">#FFFFFF</color>
+    <color name="coin_bg1">@color/white</color>
+    <color name="coin_bg2">@color/container_bg</color>
     <color name="change_bg_stroke">#1A292D32</color>
-    <color name="btc_loss_percentage_color">#66292D32</color>
+    <color name="coin_loss_percentage_color">#66292D32</color>
     <color name="statsNumbersColor">#99292D32</color>
+    <color name="bottomBarColor">@color/white</color>
+    <color name="btc_yellow">#F7931A</color>
+    <color name="eth_grey">#54575B</color>
+    <color name="xrp_blue">#1276A7</color>
+    <color name="close_tint">@color/text_black</color>
 </resources>

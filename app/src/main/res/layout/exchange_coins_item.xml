@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/exchange_currency_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/container_bg"
+    android:paddingStart="32dp"
+    android:paddingTop="21dp"
+    android:paddingEnd="32dp"
+    android:paddingBottom="21dp">
+
+    <FrameLayout
+        android:id="@+id/coin_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/coin_bg2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/coin_image"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="16dp"
+            android:contentDescription="@string/coin_icon"
+            tools:src="@drawable/ic_ripple" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/coin_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="9dp"
+        tools:text="@string/btc"
+        tools:textColor="@color/btc_yellow"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/coin_container"
+        app:layout_constraintTop_toTopOf="@id/coin_container" />
+
+    <TextView
+        android:id="@+id/coin_percentage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="9dp"
+        android:text="@string/btc_percentage"
+        android:textColor="@color/coin_loss_percentage_color"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/coin_container"
+        app:layout_constraintEnd_toEndOf="@id/coin_name"
+        app:layout_constraintStart_toStartOf="@id/coin_name"
+        app:layout_constraintTop_toBottomOf="@id/coin_name" />
+
+    <ImageView
+        android:id="@+id/trend_chart"
+        android:layout_width="80dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="32dp"
+        android:contentDescription="@string/coin_line_chart"
+        tools:src="@drawable/ic_btc_chart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/change"
+        android:layout_width="82dp"
+        android:layout_height="32dp"
+        android:background="@drawable/change_bg"
+        android:gravity="center"
+        android:text="@string/change"
+        android:textColor="#5149F7"
+        android:textSize="14sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/exchange_amount"
+        android:textSize="18sp"
+        android:id="@+id/exchange_amount"
+        android:textColor="@color/headerTextColor"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/exchange_amount"
+        android:layout_height="wrap_content"
+        android:text="@string/amount_btc"
+        app:layout_constraintEnd_toEndOf="@id/exchange_amount"
+        android:layout_marginTop="6dp"
+        android:textColor="@color/coin_loss_percentage_color"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
