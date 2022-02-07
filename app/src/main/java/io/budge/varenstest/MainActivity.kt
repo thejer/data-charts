@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setUpCandlestickChart(binding.candlestickChart, getCandlestickData())
+        setUpCandlestickChart(getCandlestickData())
         binding.change.setOnClickListener {
             val modalBottomSheet = ModalBottomSheet()
             modalBottomSheet.show(supportFragmentManager, ModalBottomSheet.TAG)
@@ -39,12 +39,12 @@ class MainActivity : AppCompatActivity() {
                 binding.candlestickChart.hide()
                 binding.lineChart.invalidate()
                 binding.lineChart.show()
-                setupLineChart(binding.lineChart, getLineData())
+                setupLineChart(getLineData())
                 false
             } else {
                 binding.candlestickChart.invalidate()
                 binding.candlestickChart.show()
-                setUpCandlestickChart(binding.candlestickChart, getCandlestickData())
+                setUpCandlestickChart(getCandlestickData())
                 binding.lineChart.invalidate()
                 binding.lineChart.hide()
                 true
@@ -52,30 +52,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupLineChart(chart: LineChart, data: LineData) {
-
-        // no description text
-        chart.description.isEnabled = false
-
-
-        //
-        // enable / disable grid background
-        chart.setDrawGridBackground(false)
-
-        // enable touch gestures
-        chart.setTouchEnabled(true)
-
-        // enable scaling and dragging
-        chart.isDragEnabled = true
-        chart.setScaleEnabled(true)
-
-        chart.setPinchZoom(false)
-
-        chart.data = data
-
-        val l = chart.legend
-        l.isEnabled = false
-        val axisLeft = chart.axisLeft
+    private fun setupLineChart(lineData: LineData) = binding.lineChart.run {
+        description.isEnabled = false
+        setDrawGridBackground(false)
+        setTouchEnabled(true)
+        isDragEnabled = true
+        setScaleEnabled(true)
+        setPinchZoom(false)
+        data = lineData
+        legend.isEnabled = false
+        val axisLeft = axisLeft
         axisLeft.apply {
             isEnabled = false
             spaceTop = 40f
@@ -83,7 +69,6 @@ class MainActivity : AppCompatActivity() {
             setDrawAxisLine(false)
         }
 
-        val axisRight = chart.axisRight
         axisRight.apply {
             isEnabled = true
             textSize = 12f
@@ -101,7 +86,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        val xAxis = chart.xAxis
         xAxis.apply {
             isEnabled = true
             textSize = 10f
@@ -134,49 +118,39 @@ class MainActivity : AppCompatActivity() {
             setLabelCount(7, true)
         }
 
-        chart.setViewPortOffsets(100f, 100f, 200f, 100f)
-        // animate calls invalidate()...
-        chart.animateX(2500)
+        setViewPortOffsets(100f, 100f, 200f, 100f)
+        animateX(2500)
     }
 
     private fun getLineData(): LineData {
         val values = ArrayList<Entry>()
         for (i in 0 until 56) {
             val value = nextInt(1300, 1800).toFloat()
-            Log.d("getData", "getData:$i $value")
             values.add(Entry(i.toFloat(), value))
         }
 
-        // create a dataset and give it a type
         val drawable = ContextCompat.getDrawable(this, R.drawable.gradient_drawable)
-
-        val set1 = LineDataSet(values, "DataSet 1")
-        set1.setDrawCircleHole(false)
-        set1.setDrawCircles(false)
-        set1.setDrawFilled(true)
-        set1.lineWidth = 2f
-        set1.setDrawValues(false)
-        set1.fillDrawable = drawable
-        set1.color = parseColor("#0CB1A0")
-        // create a data object with the data sets
-        return LineData(set1)
+        val dataSet = LineDataSet(values, "DataSet")
+        dataSet.apply {
+            setDrawCircleHole(false)
+            setDrawCircles(false)
+            setDrawFilled(true)
+            lineWidth = 2f
+            setDrawValues(false)
+            fillDrawable = drawable
+            color = parseColor("#0CB1A0")
+        }
+        return LineData(dataSet)
     }
 
-    private fun setUpCandlestickChart(chart: CandleStickChart, data: CandleData) {
-        chart.description.isEnabled = false
-        chart.setDrawGridBackground(false)
-        chart.setTouchEnabled(true)
-
-        // scaling can now only be done on x- and y-axis separately
-        chart.setPinchZoom(false)
-
-        // enable scaling and dragging
-        chart.isDragEnabled = true
-        chart.setScaleEnabled(false)
-        chart.setPinchZoom(false)
-        chart.highlighter
-        val xAxis = chart.xAxis
-
+    private fun setUpCandlestickChart(candleData: CandleData) = binding.candlestickChart.run {
+        description.isEnabled = false
+        setDrawGridBackground(false)
+        setTouchEnabled(true)
+        setPinchZoom(false)
+        isDragEnabled = true
+        setScaleEnabled(false)
+        setPinchZoom(false)
         xAxis.apply {
             position = XAxisPosition.BOTTOM
             setDrawGridLines(false)
@@ -211,13 +185,10 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        val l = chart.legend
-        l.isEnabled = false
-        val leftAxis = chart.axisLeft
+        legend.isEnabled = false
+        val leftAxis = axisLeft
         leftAxis.isEnabled = false
-
-        val rightAxis = chart.axisRight
-        rightAxis.apply {
+        axisRight.apply {
             setDrawGridLines(true)
             setDrawAxisLine(false)
             axisMaximum = 1800f
@@ -232,12 +203,9 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        chart.setViewPortOffsets(100f, 100f, 200f, 100f)
-        // animate calls invalidate()...
-        chart.data = data
-        chart.animateX(2500)
-
-//        chart.invalidate()
+        setViewPortOffsets(100f, 100f, 200f, 100f)
+        data = candleData
+        animateX(2500)
     }
 
     private fun getCandlestickData(): CandleData {
