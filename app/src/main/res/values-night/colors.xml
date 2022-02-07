@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_500">#4941F2</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
+    <color name="white_40">#66FFFFFF</color>
     <color name="white">#FFFFFFFF</color>
     <color name="onPri">#1c1c1c</color>
     <color name="royal_blue">#514af7</color>
@@ -21,7 +21,13 @@
     <color name="imageStrokeBg">@color/white_10</color>
     <color name="headerTextColor">@color/white</color>
     <color name="coin_bg1">#222222</color>
+    <color name="coin_bg2">@color/coin_bg1</color>
     <color name="change_bg_stroke">@color/white_10</color>
-    <color name="btc_loss_percentage_color">#66FFFFFF</color>
+    <color name="coin_loss_percentage_color">#66FFFFFF</color>
     <color name="statsNumbersColor">@color/subtitle_text_color</color>
+    <color name="bottomBarColor">#1C1C1C</color>
+    <color name="btc_yellow">#F7931A</color>
+    <color name="eth_grey">#54575B</color>
+    <color name="xrp_blue">#1276A7</color>
+    <color name="close_tint">@color/white_40</color>
 </resources>

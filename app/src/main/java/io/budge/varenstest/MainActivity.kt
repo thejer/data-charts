@@ -26,12 +26,30 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val lineChart = binding.lineChart
-        val data = getLineData()
-        // add some transparency to the color with "& 0x90FFFFFF"
-        setupLineChart(lineChart, data)
-
         setUpCandlestickChart(binding.candlestickChart, getCandlestickData())
+        binding.change.setOnClickListener {
+            val modalBottomSheet = ModalBottomSheet()
+            modalBottomSheet.show(supportFragmentManager, ModalBottomSheet.TAG)
+        }
+
+        var isCandleStickChart = true
+        binding.settings.setOnClickListener {
+            isCandleStickChart = if (isCandleStickChart) {
+                binding.candlestickChart.invalidate()
+                binding.candlestickChart.hide()
+                binding.lineChart.invalidate()
+                binding.lineChart.show()
+                setupLineChart(binding.lineChart, getLineData())
+                false
+            } else {
+                binding.candlestickChart.invalidate()
+                binding.candlestickChart.show()
+                setUpCandlestickChart(binding.candlestickChart, getCandlestickData())
+                binding.lineChart.invalidate()
+                binding.lineChart.hide()
+                true
+            }
+        }
     }
 
     private fun setupLineChart(chart: LineChart, data: LineData) {
@@ -93,26 +111,27 @@ class MainActivity : AppCompatActivity() {
             position = XAxisPosition.BOTTOM
             valueFormatter = object : IndexAxisValueFormatter() {
                 override fun getFormattedValue(value: Float, axis: AxisBase): String {
-                    val s = when (value) {
-                        in 0f..7f -> "Sun"
+                    val s = when (value.toInt()) {
+                        0 -> "Sun"
 
-                        in 7.1f..14f -> "Mon"
+                        9 -> "Mon"
 
-                        in 14.1f..21f  -> "Tue"
+                        18  -> "Tue"
 
-                        in 21.1f..28f -> "Wed"
+                        27 -> "Wed"
 
-                        in 28.1f..35f -> "Thu"
+                        36 -> "Thu"
 
-                        in 35.1f..42f -> "Fri"
+                        45 -> "Fri"
 
                         else -> "Sat"
                     }
+
                     return s.uppercase()
                 }
             }
 
-            setLabelCount(8, true)
+            setLabelCount(7, true)
         }
 
         chart.setViewPortOffsets(100f, 100f, 200f, 100f)
